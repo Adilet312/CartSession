@@ -1,59 +1,45 @@
-
 package book.business;
-import book.business.OrderDetail;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- *
- * @author amt
- */
-public class Cart implements Serializable
-{
-    private ArrayList<OrderDetail> items  = new ArrayList<OrderDetail>();
-    
-    public Cart()
-    {
-        
+
+public class Cart implements Serializable {
+
+    private ArrayList<LineItem> items;
+
+    public Cart() {
+        items = new ArrayList<LineItem>();
     }
-    
-    public ArrayList<OrderDetail> getSelectedListProducts()
-    {
+
+    public ArrayList<LineItem> getItems() {
         return items;
     }
-    public void setSelectedProducts(ArrayList<OrderDetail> new_products)
-    {
-        items = new_products;
-    }
-    public int getSize()
-    {
+
+    public int getCount() {
         return items.size();
     }
-    
-    public void addProduct(OrderDetail item)
-    {
-        String codeProduct = item.getProduct().getCode();
+
+    public void addItem(LineItem item) {
+        String code = item.getProduct().getCode();
         int quantity = item.getQuantity();
-        for(int idx = 0; idx < items.size(); idx++)
-        {
-            if(items.get(idx).getProduct().getCode().equals(codeProduct))
-            {
-                items.get(idx).setQuantity(quantity);
+        for (LineItem cartItem : items) {
+            if (cartItem.getProduct().getCode().equals(code)) {
+                cartItem.setQuantity(quantity);
+                return;
             }
         }
         items.add(item);
     }
     
-    public void deleteProduct(OrderDetail givenProduct)
-    {
-        String code = givenProduct.getProduct().getCode();
-        for(int idx = 0; idx < items.size(); idx++)
-        {
-            if(items.get(idx).getProduct().getCode().equals(code))
-            {
-                items.remove(idx);
+    public void removeItem(LineItem item) {
+        String code = item.getProduct().getCode();
+        for (int i = 0; i < items.size(); i++) {
+            LineItem lineItem = items.get(i);
+            if (lineItem.getProduct().getCode().equals(code)) {
+                items.remove(i);
+                return;
             }
         }
-        
     }
 }
