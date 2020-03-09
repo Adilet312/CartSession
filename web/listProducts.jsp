@@ -32,7 +32,7 @@
                     <td><c:out value="${product.description}"/></td>
                     <td><c:out value="${product.price}"/></td>
                     <td><form action="cart" method="post">
-                            <input type="hidden" name="productId" value="{product.code}">
+                            <input type="hidden" name="productCode" value="${product.code}">
                             <input type="submit" value="Add To Cart">
                         </form>
                     </td>

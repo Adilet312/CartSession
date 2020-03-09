@@ -17,14 +17,9 @@ public class OrderDetail implements Serializable
     private int quantity;
     public OrderDetail() 
     {
-        this.product = null;
-        this.quantity = 1;
+       
     }
-    public OrderDetail(Product product, int quantity)
-    {
-        this.product = product;
-        this.quantity = 1;
-    }
+  
 
     /**
      * @return the product

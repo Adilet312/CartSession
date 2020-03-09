@@ -1,5 +1,6 @@
 
 package book.business;
+import book.business.OrderDetail;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -9,48 +10,48 @@ import java.util.ArrayList;
  */
 public class Cart implements Serializable
 {
-    private ArrayList<OrderDetail> selectedProducts;
+    private ArrayList<OrderDetail> items  = new ArrayList<OrderDetail>();
     
     public Cart()
     {
-        selectedProducts = new ArrayList<OrderDetail>();
+        
     }
     
     public ArrayList<OrderDetail> getSelectedListProducts()
     {
-        return this.selectedProducts;
+        return items;
     }
     public void setSelectedProducts(ArrayList<OrderDetail> new_products)
     {
-        this.selectedProducts = new_products;
+        items = new_products;
     }
     public int getSize()
     {
-        return this.selectedProducts.size();
+        return items.size();
     }
     
-    public void addProduct(OrderDetail givenProduct)
+    public void addProduct(OrderDetail item)
     {
-        String code = givenProduct.getProduct().getCode();
-        int quantity = givenProduct.getQuantity();
-        for(int idx = 0; idx < this.selectedProducts.size(); idx++)
+        String codeProduct = item.getProduct().getCode();
+        int quantity = item.getQuantity();
+        for(int idx = 0; idx < items.size(); idx++)
         {
-            if(this.selectedProducts.get(idx).getProduct().getCode().equals(code))
+            if(items.get(idx).getProduct().getCode().equals(codeProduct))
             {
-                this.selectedProducts.get(idx).setQuantity(quantity);
+                items.get(idx).setQuantity(quantity);
             }
         }
-        this.selectedProducts.add(givenProduct);
+        items.add(item);
     }
     
     public void deleteProduct(OrderDetail givenProduct)
     {
         String code = givenProduct.getProduct().getCode();
-        for(int idx = 0; idx < this.selectedProducts.size(); idx++)
+        for(int idx = 0; idx < items.size(); idx++)
         {
-            if(this.selectedProducts.get(idx).getProduct().getCode().equals(code))
+            if(items.get(idx).getProduct().getCode().equals(code))
             {
-                this.selectedProducts.remove(idx);
+                items.remove(idx);
             }
         }
         
